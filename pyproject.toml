@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "postfix-mail-admin"
+version = "0.1.0"
+description = "Postfix Mail Admin Panel"
+authors = ["Sergey Dyachok <sergey@sdyachok.com.ua>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Flask = "^1.1.1"
+Flask-SQLAlchemy = "^2.4.1"
+alembic = "^1.3.2"
+Flask-WTF = "^0.14.2"
+WTForms-Alchemy = "^0.16.9"
+WTForms-Components = "^0.10.4"
+Flask-Login = "^0.4.1"
+Flask-Migrate = "^2.5.2"
+pytz = "^2019.3"
+
+[tool.poetry.dev-dependencies]
+flask-debugtoolbar = "^0.10.1"
+psycopg2-binary = {version = "^2.8.4", optional = true}
+black = "^19.10b0"
+
+[tool.black]
+line-length = 80
+target-version = ["py37"]
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | node_modules
+  )/
+  | manage.py
+)
+'''
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

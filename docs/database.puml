@@ -1,0 +1,55 @@
+@startuml
+
+scale 1.25
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity users {
+    *id: integer <<PK>>
+    --
+    *email: varchar(150)
+    *password: varchar(150)
+    is_active: boolean
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity domains {
+    *id: integer <<PK>>
+    --
+    *fqdn: varchar(150)
+    is_active: boolean
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity mailboxes {
+    *id: integer <<PK>>
+    *domain_id: integer <<FK>>
+    --
+    *name: varchar(150)
+    *password: varchar(150)
+    is_active: boolean
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity aliases {
+    *id: integer <<PK>>
+    *domain_id: integer <<FK>>
+    --
+    *source: varchar(150)
+    *destination: varchar(150)
+    is_active: boolean
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+domains ||..o{ mailboxes
+domains ||..o{ aliases
+
+@enduml
