@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template
 
 from .auth import load_user
+from .cli import register_cli
 from .services import db, migrate, login_manager
 from .views import register_blueprints
 
@@ -29,3 +30,4 @@ if app.debug:
 login_manager.user_loader(load_user)
 
 register_blueprints(app)
+register_cli(app)
