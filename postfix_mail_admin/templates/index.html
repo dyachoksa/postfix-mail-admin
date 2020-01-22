@@ -3,9 +3,11 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-  <h1>Dashboard page</h1>
+  <div>
+    <h1>Dashboard page</h1>
 
-  <p>
-    Hi, {{ current_user.email }}!
-  </p>
+    <p>
+      Hi, {{ current_user.email }}!
+    </p>
+  </div>
 {% endblock %}

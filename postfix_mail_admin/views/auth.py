@@ -17,7 +17,7 @@ def login():
             login_user(user)
             return redirect(url_for("dashboard.index"))
 
-        flash("Wrong email or password", "error")
+        flash("Wrong email or password", "warning")
 
     return render_template("login.html", form=form)
 

@@ -14,3 +14,4 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_RECORD_QUERIES = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
