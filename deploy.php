@@ -26,23 +26,16 @@ set('writable_dirs', []);
 
 // Configuring the rsync exclusions.
 add('rsync', [
-    /*
     'exclude' => [
         '.git',
+        '/app.db',
         '/.env',
+        '/.vagrant/',
         '/.venv/',
         '/node_modules/',
         '/docs/',
         '/assets/',
-        'deploy.php',
-    ],
-    */
-    'include' => [
-        '/public/',
-        '/migrations/',
-        '/postfix_mail_admin/',
-        '/poetry.lock',
-        '/pyproject.toml',
+        '/deploy.php',
     ],
 ]);
 
