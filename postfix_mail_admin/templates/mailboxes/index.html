@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Mailboxes{% endblock %}
+
+{% block content %}
+  <div class="mt-4">
+    <div class="d-flex">
+      <h1>Mailboxes</h1>
+      <div class="ml-auto">
+        <a href="{{ url_for("mailboxes.create") }}"
+           class="btn btn-raised btn-primary d-inline-flex align-items-center"
+           title="Add a new mailbox">
+          <i class="material-icons">add</i>
+          <span class="pl-1">Add</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4 table-responsive-md">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Mailbox</th>
+          <th>Domain</th>
+          <th>Is active?</th>
+          <th>Created At</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mailbox in pager.items %}
+          <tr>
+            <th scope="row" class="align-middle">{{ mailbox.id }}</th>
+            <td class="align-middle">{{ mailbox.name }}</td>
+            <td class="align-middle">{{ mailbox.domain.fqdn }}</td>
+            <td class="align-middle">
+              {% if mailbox.is_active %}
+                <span class="text-success">
+                    <i class="material-icons font-weight-bold">check</i>
+                  </span>
+              {% else %}
+                <span class="text-warning">
+                    <i class="material-icons font-weight-bold">remove</i>
+                  </span>
+              {% endif %}
+            </td>
+            <td class="align-middle">{{ mailbox.created_at.strftime("%c") }}</td>
+            <td class="align-middle">
+              <div class="btn-toolbar btn-group-sm" role="toolbar" aria-label="Actions">
+                <a href="{{ url_for("mailboxes.edit", mailbox_id=mailbox.id) }}"
+                   class="btn btn-info" title="Edit">
+                  <i class="material-icons">edit</i>
+                </a>
+                <a href="{{ url_for("mailboxes.delete", mailbox_id=mailbox.id) }}"
+                   class="btn btn-danger" title="Delete"
+                   onclick="return confirm('Are you sure you want to delete {{ mailbox.email }}?')"
+                >
+                  <i class="material-icons">delete</i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      {% from "helpers/_pagination.html" import render_pagination %}
+      {{ render_pagination(pager, "mailboxes.index") }}
+    </div>
+  </div>
+{% endblock %}

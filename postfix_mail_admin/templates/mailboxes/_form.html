@@ -1,0 +1,54 @@
+{{ form.hidden_tag() }}
+
+<div class="mt-4 form-row">
+  <div class="col">
+    <div class="form-group">
+      {{ form.name.label(class_="bmd-label-static") }}
+      {{ form.name(class_="form-control is-invalid" if form.name.errors else "form-control", autocomplete="username") }}
+      {% if form.name.errors %}
+        <div class="invalid-feedback">
+          {% for error in form.name.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      {{ form.domain.label(class_="bmd-label-static") }}
+      <div class="input-group align-items-center">
+        <div class="input-group-prepend mr-1">
+          <span>&commat;</span>
+        </div>
+        {{ form.domain(class_="form-control is-invalid" if form.domain.errors else "form-control", size=1) }}
+        {% if form.domain.errors %}
+          <div class="invalid-feedback">
+            {% for error in form.domain.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  {{ form.password.label(class_="bmd-label-static") }}
+  {{ form.password(class_="form-control is-invalid" if form.password.errors else "form-control", autocomplete="new-password") }}
+  {% if form.password.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.password.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="mt-4 checkbox">
+  <label for="{{ form.is_active.label.field_id }}">
+    {{ form.is_active }}
+    {{ form.is_active.label.text }}
+  </label>
+</div>

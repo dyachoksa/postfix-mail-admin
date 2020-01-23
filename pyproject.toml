@@ -19,6 +19,8 @@ pytz = "^2019.3"
 python-dotenv = "^0.10.5"
 bcrypt = "^3.1.7"
 colorama = "^0.4.3"
+sqlalchemy-utils = "^0.36.1"
+passlib = "^1.7.2"
 
 [tool.poetry.dev-dependencies]
 flask-debugtoolbar = "^0.10.1"

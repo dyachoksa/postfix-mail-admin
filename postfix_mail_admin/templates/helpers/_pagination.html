@@ -1,0 +1,23 @@
+{% macro render_pagination(pagination, endpoint) %}
+  <nav aria-label="Mailboxes pagination">
+    <ul class="pagination justify-content-center">
+      {%- for page in pagination.iter_pages() %}
+        {% if page %}
+          {% if page != pagination.page %}
+            <li class="page-item">
+              <a href="{{ url_for(endpoint, page=page) }}" class="page-link">{{ page }}</a>
+            </li>
+          {% else %}
+            <li class="page-item active">
+              <span class="page-link">{{ page }} <span class="sr-only">(current)</span></span>
+            </li>
+          {% endif %}
+        {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">&hellip;</span>
+          </li>
+        {% endif %}
+      {%- endfor %}
+    </ul>
+  </nav>
+{% endmacro %}
