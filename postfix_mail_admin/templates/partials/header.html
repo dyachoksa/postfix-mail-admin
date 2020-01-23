@@ -1,7 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a href="/" class="navbar-brand text-uppercase">Postfix Mail</a>
+      <a href="{{ url_for("dashboard.index") }}"
+         class="navbar-brand text-uppercase"
+      >Postfix Mail</a>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -17,7 +19,10 @@
         {% if current_user.is_authenticated %}
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="/" class="nav-link">Dashboard</a>
+              <a href="{{ url_for("dashboard.index") }}" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url_for("domains.index") }}" class="nav-link">Domains</a>
             </li>
 
             <li class="nav-item dropdown">

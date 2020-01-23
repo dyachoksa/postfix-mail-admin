@@ -7,7 +7,12 @@ class Domain(BaseModel):
 
     __tablename__ = "domains"
 
-    fqdn = db.Column(db.String(150), unique=True, nullable=False)
+    fqdn = db.Column(
+        db.String(150),
+        unique=True,
+        nullable=False,
+        info={"label": "Domain name"},
+    )
 
     mailboxes = db.relationship(
         "Mailbox", lazy=True, backref=db.backref("domain", lazy=False)

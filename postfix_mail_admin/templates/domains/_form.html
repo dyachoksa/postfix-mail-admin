@@ -1,0 +1,20 @@
+{{ form.hidden_tag() }}
+
+<div class="form-group">
+  {{ form.fqdn.label(class_="bmd-label-floating") }}
+  {{ form.fqdn(class_="form-control is-invalid" if form.fqdn.errors else "form-control") }}
+  {% if form.fqdn.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.fqdn.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="mt-4 checkbox">
+  <label for="{{ form.is_active.label.field_id }}">
+    {{ form.is_active }}
+    {{ form.is_active.label.text }}
+  </label>
+</div>

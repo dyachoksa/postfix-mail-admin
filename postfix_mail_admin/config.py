@@ -14,6 +14,8 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    WTF_CSRF_ENABLED = True
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

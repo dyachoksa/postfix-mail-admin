@@ -12,7 +12,11 @@ class BaseModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     is_active = db.Column(
-        db.Boolean, default=True, nullable=False, server_default=sa.true()
+        db.Boolean,
+        default=True,
+        nullable=False,
+        server_default=sa.true(),
+        info={"label": "Is active?"},
     )
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(
@@ -31,7 +35,7 @@ class BaseModel(db.Model):
 
     def __eq__(self, other):
         if isinstance(other, BaseModel):
-            return self.get_id() == other.get_id()
+            return self.id == other.id
         return NotImplemented
 
     def __ne__(self, other):

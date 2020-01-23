@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Domains{% endblock %}
+
+{% block content %}
+  <div class="mt-4">
+    <div class="d-flex">
+      <h1>Domains</h1>
+      <div class="ml-auto">
+        <a href="{{ url_for("domains.create") }}"
+           class="btn btn-raised btn-primary d-inline-flex align-items-center"
+          title="Add a new domain">
+          <i class="material-icons">add</i>
+          <span class="pl-1">Add</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4 table-responsive-md">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Domain</th>
+            <th>Is active?</th>
+            <th>Created At</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for domain in domains %}
+            <tr>
+              <th scope="row" class="align-middle">{{ domain.id }}</th>
+              <td class="align-middle">{{ domain.fqdn }}</td>
+              <td class="align-middle">
+                {% if domain.is_active %}
+                  <span class="text-success">
+                    <i class="material-icons font-weight-bold">check</i>
+                  </span>
+                {% else %}
+                  <span class="text-warning">
+                    <i class="material-icons font-weight-bold">remove</i>
+                  </span>
+                {% endif %}
+              </td>
+              <td class="align-middle">{{ domain.created_at.strftime("%c") }}</td>
+              <td class="align-middle">
+                <div class="btn-toolbar btn-group-sm" role="toolbar" aria-label="Actions">
+                  <a href="{{ url_for("domains.edit", domain_id=domain.id) }}"
+                     class="btn btn-info" title="Edit">
+                    <i class="material-icons">edit</i>
+                  </a>
+                  <a href="{{ url_for("domains.delete", domain_id=domain.id) }}"
+                     class="btn btn-danger" title="Delete"
+                     onclick="return confirm('Are you sure you want to delete {{ domain.fqdn }}?')"
+                  >
+                    <i class="material-icons">delete</i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
