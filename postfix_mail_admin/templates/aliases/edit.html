@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Edit {{ mailbox.email }}{% endblock %}
+{% block title %}Edit {{ alias }}{% endblock %}
 
 {% block content %}
   <div class="mt-6 row justify-content-center">
     <div class="col-sm-12 col-md-8">
-      <h1>Edit <code>{{ mailbox.email }}</code></h1>
+      <h2>Edit <code>{{ alias }}</code></h2>
 
       <div class="mt-4">
-        <form action="{{ url_for("mailboxes.edit", mailbox_id=mailbox.id) }}" method="post">
-          {% include "mailboxes/_form.html" %}
+        <form action="{{ url_for("aliases.edit", alias_id=alias.id) }}" method="post">
+          {% include "aliases/_form.html" %}
 
           <div class="mt-4 btn-group">
             <button type="submit" class="btn btn-raised btn-primary">Save</button>
-            <a href="{{ url_for("mailboxes.index") }}" class="ml-2 btn btn-secondary">Cancel</a>
+            <a href="{{ url_for("aliases.index") }}" class="ml-2 btn btn-secondary">Cancel</a>
           </div>
         </form>
       </div>

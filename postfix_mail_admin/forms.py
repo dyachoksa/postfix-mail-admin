@@ -4,7 +4,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms_alchemy import model_form_factory, QuerySelectField
 
 from .services import db
-from .models import Domain, Mailbox
+from .models import Domain, Mailbox, Alias
 
 BaseModelForm = model_form_factory(FlaskForm)
 
@@ -38,6 +38,18 @@ class MailboxForm(ModelForm):
         model = Mailbox
         include_foreign_keys = True
         only = ["name", "domain", "password", "is_active"]
+        attr_errors = False
+
+    domain = QuerySelectField(
+        label="Domain", query_factory=lambda: Domain.query.all()
+    )
+
+
+class AliasForm(ModelForm):
+    class Meta:
+        model = Alias
+        include_foreign_keys = True
+        only = ["domain", "source", "destination", "is_active"]
         attr_errors = False
 
     domain = QuerySelectField(

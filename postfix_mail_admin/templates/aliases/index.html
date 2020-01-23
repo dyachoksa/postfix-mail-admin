@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Aliases{% endblock %}
+
+{% block content %}
+  <div class="mt-4">
+    <div class="d-flex">
+      <h1>Aliases</h1>
+      <div class="ml-auto">
+        <a href="{{ url_for("aliases.create") }}"
+           class="btn btn-raised btn-primary d-inline-flex align-items-center"
+           title="Add a new alias">
+          <i class="material-icons">add</i>
+          <span class="pl-1">Add</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4 table-responsive-md">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Source</th>
+          <th>Domain</th>
+          <th>Destination</th>
+          <th>Is active?</th>
+          <th>Created At</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alias in pager.items %}
+          <tr>
+            <th scope="row" class="align-middle">{{ alias.id }}</th>
+            <td class="align-middle">{{ alias.source }}</td>
+            <td class="align-middle">{{ alias.domain.fqdn }}</td>
+            <td class="align-middle">{{ alias.destination }}</td>
+            <td class="align-middle">
+              {% if alias.is_active %}
+                <span class="text-success">
+                    <i class="material-icons font-weight-bold">check</i>
+                  </span>
+              {% else %}
+                <span class="text-warning">
+                    <i class="material-icons font-weight-bold">remove</i>
+                  </span>
+              {% endif %}
+            </td>
+            <td class="align-middle">{{ alias.created_at.strftime("%c") }}</td>
+            <td class="align-middle">
+              <div class="btn-toolbar btn-group-sm" role="toolbar" aria-label="Actions">
+                <a href="{{ url_for("aliases.edit", alias_id=alias.id) }}"
+                   class="btn btn-info" title="Edit">
+                  <i class="material-icons">edit</i>
+                </a>
+                <a href="{{ url_for("aliases.delete", alias_id=alias.id) }}"
+                   class="btn btn-danger" title="Delete"
+                   onclick="return confirm('Are you sure you want to delete {{ alias.email }}?')"
+                >
+                  <i class="material-icons">delete</i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      {% from "helpers/_pagination.html" import render_pagination %}
+      {{ render_pagination(pager, "aliases.index") }}
+    </div>
+  </div>
+{% endblock %}

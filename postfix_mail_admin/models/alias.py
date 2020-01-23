@@ -21,3 +21,6 @@ class Alias(BaseModel):
 
     def __repr__(self):
         return f"<Alias {self.source} {self.destination}>"
+
+    def __hash__(self):
+        return hash((self.id, self.source, self.destination,))

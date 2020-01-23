@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}New alias{% endblock %}
+
+{% block content %}
+  <div class="mt-6 row justify-content-center">
+    <div class="col-sm-12 col-md-8">
+      <h1>Add a new alias</h1>
+
+      <div class="mt-4">
+        <form action="{{ url_for("aliases.create") }}" method="post">
+          {% include "aliases/_form.html" %}
+
+          <div class="mt-4 btn-group">
+            <button type="submit" class="btn btn-raised btn-primary">Create</button>
+            <a href="{{ url_for("aliases.index") }}" class="ml-2 btn btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
