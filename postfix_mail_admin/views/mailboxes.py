@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
 from flask_sqlalchemy import Pagination
 
-from ..forms import MailboxForm
+from ..forms import MailboxForm, MailboxUpdateForm
 from ..services import db
 from ..models import Mailbox
 
@@ -44,7 +44,7 @@ def create():
 @login_required
 def edit(mailbox_id):
     mailbox = Mailbox.query.get_or_404(mailbox_id)
-    form = MailboxForm(obj=mailbox)
+    form = MailboxUpdateForm(obj=mailbox)
 
     if form.validate_on_submit():
         form.populate_obj(mailbox)

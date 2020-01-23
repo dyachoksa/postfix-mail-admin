@@ -36,7 +36,6 @@ class DomainForm(ModelForm):
 class MailboxForm(ModelForm):
     class Meta:
         model = Mailbox
-        include_foreign_keys = True
         only = ["name", "domain", "password", "is_active"]
         attr_errors = False
 
@@ -45,10 +44,17 @@ class MailboxForm(ModelForm):
     )
 
 
+class MailboxUpdateForm(MailboxForm):
+    class Meta:
+        validators = {"password": [validators.Optional()]}
+        assign_required = False
+
+    password = PasswordField("Password", validators=[validators.Optional()])
+
+
 class AliasForm(ModelForm):
     class Meta:
         model = Alias
-        include_foreign_keys = True
         only = ["domain", "source", "destination", "is_active"]
         attr_errors = False
 

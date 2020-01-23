@@ -12,9 +12,17 @@ class Alias(BaseModel):
         db.ForeignKey("domains.id", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=False,
         index=True,
+        info={"label": "Domain"},
     )
-    source = db.Column(db.String(150), nullable=False, index=True)
-    destination = db.Column(db.String(150), nullable=False)
+    source = db.Column(
+        db.String(150),
+        nullable=False,
+        index=True,
+        info={"label": "Source mailbox"},
+    )
+    destination = db.Column(
+        db.String(150), nullable=False, info={"label": "Destination email"}
+    )
 
     def __str__(self):
         return f"{self.source}->{self.destination}"
