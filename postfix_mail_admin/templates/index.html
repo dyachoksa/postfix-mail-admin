@@ -3,11 +3,29 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-  <div>
+  <div class="mt-4">
     <h1>Dashboard page</h1>
+  </div>
 
-    <p>
-      Hi, {{ current_user.email }}!
-    </p>
+  <div class="mt-2 row">
+    {% for item in stats %}
+      <div class="mt-2 col-md-6 col-lg-4">
+        <div class="card">
+          <h5 class="card-header">{{ item.label }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center font-size-medium">
+              Active <span class="badge badge-primary badge-pill">{{ item.active }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center font-size-medium">
+              Total <span class="badge badge-primary badge-pill">{{ item.total }}</span>
+            </li>
+          </ul>
+          <div class="mt-0 pt-0 pb-2 card-body d-flex justify-content-end align-items-center">
+            <a href="{{ url_for(item.endpoint + ".index") }}" class="btn btn-info">See all</a>
+            <a href="{{ url_for(item.endpoint + ".create") }}" class="btn btn-info">Add new</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 {% endblock %}
