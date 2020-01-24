@@ -21,7 +21,8 @@ def create_user(email: str, password: str):
     try:
         user = User(
             email=email,
-            password=bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()),
+            password=password
+            # password=bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()),
         )
         db.session.add(user)
         db.session.commit()

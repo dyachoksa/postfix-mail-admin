@@ -13,7 +13,11 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
-        if user is not None:
+        if (
+            user is not None
+            and user.is_active
+            and user.password == form.password.data
+        ):
             login_user(user)
             return redirect(url_for("dashboard.index"))
 

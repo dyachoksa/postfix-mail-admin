@@ -4,7 +4,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms_alchemy import model_form_factory, QuerySelectField
 
 from .services import db
-from .models import Domain, Mailbox, Alias
+from .models import Domain, Mailbox, Alias, User
 
 BaseModelForm = model_form_factory(FlaskForm)
 
@@ -25,6 +25,15 @@ class LoginForm(FlaskForm):
         ],
     )
     password = PasswordField("Password", validators=[validators.DataRequired()])
+
+
+class UserUpdateForm(ModelForm):
+    class Meta:
+        model = User
+        only = ["email", "password", "is_active"]
+        assign_required = False
+
+    password = PasswordField("Password", validators=[validators.Optional()])
 
 
 class DomainForm(ModelForm):

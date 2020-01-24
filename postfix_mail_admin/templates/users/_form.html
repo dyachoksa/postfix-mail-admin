@@ -1,0 +1,32 @@
+{{ form.hidden_tag() }}
+
+<div class="form-group">
+  {{ form.email.label(class_="bmd-label-static") }}
+  {{ form.email(class_="form-control is-invalid" if form.email.errors else "form-control", autocomplete="off") }}
+  {% if form.email.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.email.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  {{ form.password.label(class_="bmd-label-static") }}
+  {{ form.password(class_="form-control is-invalid" if form.password.errors else "form-control", autocomplete="current-password") }}
+  {% if form.password.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.password.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="mt-4 checkbox">
+  <label for="{{ form.is_active.label.field_id }}">
+    {{ form.is_active }}
+    {{ form.is_active.label.text }}
+  </label>
+</div>

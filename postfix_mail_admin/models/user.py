@@ -1,3 +1,5 @@
+from sqlalchemy_utils import PasswordType
+
 from ..services import db
 
 from .base import BaseModel
@@ -8,11 +10,20 @@ class User(BaseModel):
 
     __tablename__ = "users"
 
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(150), nullable=False)
+    email = db.Column(
+        db.String(150), unique=True, nullable=False, info={"label": "Email"}
+    )
+    password = db.Column(
+        PasswordType(150, schemes=["bcrypt"]),
+        nullable=False,
+        info={"label": "Password"},
+    )
 
     def __repr__(self):
         return f"<User {self.email}>"
 
     def __str__(self):
         return self.email
+
+    def __hash__(self):
+        return hash((self.id, self.email,))

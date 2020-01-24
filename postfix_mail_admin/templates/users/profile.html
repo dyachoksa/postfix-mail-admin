@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <div class="mt-6">
+    <div class="d-flex">
+      <h1>User profile</h1>
+      <div class="ml-auto">
+        <a href="{{ url_for("users.edit") }}"
+           class="btn btn-raised btn-primary d-inline-flex align-items-center"
+           title="Edit user">
+          <i class="material-icons">edit</i>
+          <span class="pl-1">Edit</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <dl class="">
+        <dt>Email</dt>
+        <dd>{{ user.email }}</dd>
+
+        <dt>Is active?</dt>
+        <dd>
+          {% if user.is_active %}
+            <span class="text-success">
+              <i class="material-icons font-weight-bold">check</i>
+            </span>
+          {% else %}
+            <span class="text-warning">
+              <i class="material-icons font-weight-bold">remove</i>
+            </span>
+          {% endif %}
+        </dd>
+
+        <dt>Created at</dt>
+        <dd>{{ user.created_at.strftime("%c") }}</dd>
+
+        <dt>Updated at</dt>
+        <dd>{{ user.updated_at.strftime("%c") }}</dd>
+      </dl>
+    </div>
+  </div>
+{% endblock %}
