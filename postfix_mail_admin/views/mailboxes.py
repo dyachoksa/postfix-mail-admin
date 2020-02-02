@@ -26,6 +26,7 @@ def create():
     if form.validate_on_submit():
         mailbox = Mailbox()
         form.populate_obj(mailbox)
+        mailbox.set_password(form.data["password"])
 
         db.session.add(mailbox)
         db.session.commit()
@@ -47,7 +48,11 @@ def edit(mailbox_id):
     form = MailboxUpdateForm(obj=mailbox)
 
     if form.validate_on_submit():
-        form.populate_obj(mailbox)
+        mailbox.name = form.data["name"]
+        mailbox.domain = form.data["domain"]
+        mailbox.is_active = form.data["is_active"]
+        if len(form.data["password"]) > 0:
+            mailbox.set_password(form.data["password"])
 
         db.session.add(mailbox)
         db.session.commit()

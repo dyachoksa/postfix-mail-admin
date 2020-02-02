@@ -1,7 +1,7 @@
-from sqlalchemy_utils import PasswordType
+from passlib.hash import bcrypt
 
-from ..services import db
 from .base import BaseModel
+from ..services import db
 
 
 class Mailbox(BaseModel):
@@ -21,9 +21,7 @@ class Mailbox(BaseModel):
     )
     name = db.Column(db.String(150), nullable=False, info={"label": "Mailbox"})
     password = db.Column(
-        PasswordType(150, schemes=["bcrypt"]),
-        nullable=False,
-        info={"label": "Password"},
+        db.String(150), nullable=False, info={"label": "Password"},
     )
 
     def __str__(self):
@@ -38,3 +36,6 @@ class Mailbox(BaseModel):
     @property
     def email(self):
         return f"{self.name}@{self.domain.fqdn}" if self.domain_id else "<none>"
+
+    def set_password(self, value):
+        self.password = bcrypt.hash(value)

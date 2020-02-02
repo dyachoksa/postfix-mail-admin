@@ -1,8 +1,7 @@
-from sqlalchemy_utils import PasswordType
-
-from ..services import db
+from passlib.hash import bcrypt
 
 from .base import BaseModel
+from ..services import db
 
 
 class User(BaseModel):
@@ -14,9 +13,7 @@ class User(BaseModel):
         db.String(150), unique=True, nullable=False, info={"label": "Email"}
     )
     password = db.Column(
-        PasswordType(150, schemes=["bcrypt"]),
-        nullable=False,
-        info={"label": "Password"},
+        db.String(150), nullable=False, info={"label": "Password"},
     )
 
     def __repr__(self):
@@ -27,3 +24,6 @@ class User(BaseModel):
 
     def __hash__(self):
         return hash((self.id, self.email,))
+
+    def set_password(self, value):
+        self.password = bcrypt.hash(value)

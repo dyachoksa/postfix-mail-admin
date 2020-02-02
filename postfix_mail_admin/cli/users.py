@@ -1,10 +1,9 @@
-import bcrypt
 import click
 import sqlalchemy.exc
 from flask.cli import AppGroup
 
-from ..services import db
 from ..models import User
+from ..services import db
 
 users_cli = AppGroup(
     "users",
@@ -19,11 +18,8 @@ users_cli = AppGroup(
 def create_user(email: str, password: str):
     """Create a new user account to access admin panel"""
     try:
-        user = User(
-            email=email,
-            password=password
-            # password=bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()),
-        )
+        user = User(email=email)
+        user.set_password(password)
         db.session.add(user)
         db.session.commit()
 
