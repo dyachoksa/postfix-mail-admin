@@ -51,6 +51,7 @@ class MailboxForm(ModelForm):
     domain = QuerySelectField(
         label="Domain", query_factory=lambda: Domain.query.all()
     )
+    password = PasswordField("Password", validators=[validators.DataRequired()])
 
 
 class MailboxUpdateForm(MailboxForm):
